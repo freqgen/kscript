@@ -2,14 +2,13 @@
 
 import "KSPMathV700X.ksp"
 
-on init 
-
+on init
 	pgs_create_key(MENU_VAL, 1)
 	declare ui_menu menu
 	add_menu_item(menu, "text", 0)
 end on
 
-on note 
+on note
 	pgs_set_key_val(MENU_VAL, 0, menu)
 end on
 
