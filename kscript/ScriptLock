@@ -1,0 +1,35 @@
+{#pragma save_compiled_source \\192.168.1.11\Studio D Sessions\Sonix\Kontakt Sonix\Kontakt Builds\Resources\scripts\LockScript.txt}
+
+{Lock script tutorial from d.healey and mk828}
+on init 
+	set_ui_height_px(250)
+	lock_script(250,1)
+end on
+
+function lock_script(ui_height, status)
+	declare lock
+	make_persistent(lock)
+	read_persistent_var(lock)
+
+	declare ui_slider sli_no_open(0,1)
+	sli_no_open -> PICTURE := "lock"
+	sli_no_open -> POS_X:= 0
+	sli_no_open -> ALLOW_AUTOMATION := 0
+
+	if in_range(ui_height, 54, 540)
+		sli_no_open -> POS_Y := ui_height - 20
+	else 
+		sli_no_open -> POS_Y := 34
+	end if
+
+	sli_no_open -> HIDE := HIDE_WHOLE_CONTROL
+	if status = 0
+		lock := 0
+	else 
+		if lock < 1
+			inc(lock)
+		else 
+			sli_no_open -> HIDE := HIDE_PART_NOTHING
+		end if
+	end if
+end function
